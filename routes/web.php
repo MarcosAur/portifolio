@@ -14,5 +14,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('inicial');
+});
+
+Route::get('/imagem', function () {
+    return url('perfil.png');
 });
