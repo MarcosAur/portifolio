@@ -7,33 +7,35 @@ const skills = ref([
   'Engenharia de Dados',
   'Processamento de Dados',
   'APIs Web',
-  'Arquitetura de Microsserviços',
+  'Desenvolvimento Mobile',
 ]);
 
 const projects = ref([
   {
-    name: 'Agno Agent / Oráculo',
-    description: 'Foco em Inteligência Artificial e Agentes Autônomos.',
-    techs: ['Python', 'AI', 'Machine Learning'],
-    link: 'https://github.com/MarcosAur/agno-agent'
+    name: 'Oráculo',
+    description: 'Sistema de busca semântica, RAG e perguntas e respostas (QA) sobre documentos PDF.',
+    techs: ['Python', 'IA', 'RAG', 'NLP'],
+    link: 'https://github.com/MarcosAur/oraculo',
+    featured: true
   },
   {
-    name: 'ETL IPCA15',
-    description: 'Processamento e Engenharia de Dados.',
-    techs: ['Python', 'ETL', 'Dados'],
-    link: 'https://github.com/MarcosAur/etl-ipca15'
+    name: 'Apex Workout',
+    description: 'Aplicativo mobile para acompanhamento e gestão de treinos de força.',
+    techs: ['Flutter', 'Dart', 'Mobile'],
+    link: 'https://github.com/MarcosAur/apex'
   },
   {
-    name: 'Loja Web',
-    description: 'Sistema web completo com API e Frontend.',
-    techs: ['Web', 'API', 'Backend'],
-    link: 'https://github.com/MarcosAur/loja_web-api'
+    name: 'Estante Virtual - Frontend',
+    description: 'Aplicação web reativa para catálogo de livros, avaliações e perfil literário.',
+    techs: ['Vue.js', 'TypeScript', 'Vite', 'Frontend'],
+    link: 'https://github.com/MarcosAur/estante_virtual_front',
+    demo: 'https://marcosaur.github.io/estante_virtual_front/'
   },
   {
-    name: 'Arquitetura de Microsserviços',
-    description: 'Projeto avançado de arquitetura de software.',
-    techs: ['Arquitetura', 'Microsserviços', 'Backend'],
-    link: 'https://github.com/MarcosAur/Arq_Micro_MBA_Eng'
+    name: 'Estante Virtual - API',
+    description: 'API RESTful para gerenciamento de acervo literário e estante virtual.',
+    techs: ['PHP', 'Laravel', 'API', 'Backend'],
+    link: 'https://github.com/MarcosAur/estante_virtual_api'
   }
 ]);
 </script>
@@ -66,7 +68,7 @@ const projects = ref([
             </span>
           </h1>
           <p class="text-xl text-gray-400">
-            Engenheiro de Dados & Desenvolvedor Web.
+            Engenheiro de Dados & Desenvolvedor Web / Mobile.
             Transformando dados em soluções inteligentes e modernas.
           </p>
           <div class="flex gap-4 pt-4">
@@ -118,30 +120,51 @@ const projects = ref([
         <h2 class="text-3xl font-bold mb-10 text-center">
           Projetos em <span class="text-primary-light">Destaque</span>
         </h2>
-        <div class="grid md:grid-cols-2 gap-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <div 
             v-for="project in projects" 
             :key="project.name"
-            class="bg-bg-card p-6 rounded-xl border border-gray-800 hover:border-primary transition-all duration-300 group"
+            class="bg-bg-card p-6 rounded-xl border transition-all duration-300 group flex flex-col justify-between"
+            :class="project.featured ? 'border-primary/60 shadow-[0_0_20px_rgba(0,123,255,0.25)] hover:border-primary-light' : 'border-gray-800 hover:border-primary'"
           >
-            <h3 class="text-xl font-bold mb-2 group-hover:text-primary-light transition-colors">
-              {{ project.name }}
-            </h3>
-            <p class="text-gray-400 mb-4 h-12">
-              {{ project.description }}
-            </p>
-            <div class="flex flex-wrap gap-2 mb-6">
-              <span 
-                v-for="tech in project.techs" 
-                :key="tech"
-                class="text-xs bg-gray-900 text-gray-300 px-2 py-1 rounded"
-              >
-                {{ tech }}
-              </span>
+            <div>
+              <div class="flex items-start justify-between gap-2 mb-2">
+                <h3 class="text-xl font-bold group-hover:text-primary-light transition-colors">
+                  {{ project.name }}
+                </h3>
+                <span 
+                  v-if="project.featured" 
+                  class="bg-primary/20 text-primary-light border border-primary/40 text-xs px-2.5 py-1 rounded-full font-semibold flex items-center gap-1 shadow-sm shrink-0"
+                >
+                  ★ Destaque
+                </span>
+              </div>
+              <p class="text-gray-400 mb-4 h-12">
+                {{ project.description }}
+              </p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span 
+                  v-for="tech in project.techs" 
+                  :key="tech"
+                  class="text-xs bg-gray-900 text-gray-300 px-2 py-1 rounded"
+                >
+                  {{ tech }}
+                </span>
+              </div>
             </div>
-            <a :href="project.link" target="_blank" class="text-primary hover:text-white font-medium text-sm flex items-center gap-1">
-              Ver no GitHub &rarr;
-            </a>
+            <div class="flex items-center gap-4 flex-wrap">
+              <a 
+                v-if="project.demo" 
+                :href="project.demo" 
+                target="_blank" 
+                class="text-primary hover:text-white font-medium text-sm flex items-center gap-1"
+              >
+                Acessar Projeto &rarr;
+              </a>
+              <a :href="project.link" target="_blank" class="text-primary hover:text-white font-medium text-sm flex items-center gap-1">
+                Ver no GitHub &rarr;
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -153,7 +176,7 @@ const projects = ref([
       <div class="max-w-5xl mx-auto px-4 text-center">
         <h2 class="text-2xl font-bold mb-6">Vamos Conversar?</h2>
         <p class="text-gray-400 mb-8 max-w-md mx-auto">
-          Estou sempre aberto a novas oportunidades e desafios em Engenharia de Dados, IA e Desenvolvimento Web.
+          Estou sempre aberto a novas oportunidades e desafios em Engenharia de Dados, IA e Desenvolvimento Web / Mobile.
         </p>
         <div class="flex justify-center flex-wrap gap-6">
           <a href="https://github.com/MarcosAur" target="_blank" class="text-gray-400 hover:text-white hover:scale-110 transition-transform">
@@ -164,6 +187,9 @@ const projects = ref([
           </a>
           <a href="mailto:marcosaureliomendesoliveira@gmail.com" class="text-gray-400 hover:text-white hover:scale-110 transition-transform">
             Email
+          </a>
+          <a href="https://wa.me/5585999329263" target="_blank" class="text-gray-400 hover:text-[#25D366] hover:scale-110 transition-transform">
+            WhatsApp
           </a>
         </div>
       </div>
